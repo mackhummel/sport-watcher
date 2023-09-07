@@ -11,4 +11,3 @@ npm run build;
 aws s3 sync build/ s3://$APP_BUCKET_NAME/
 
 echo -e "\n\n"
-echo "Deploy to Prod complete: https://staging.twdc.watch"

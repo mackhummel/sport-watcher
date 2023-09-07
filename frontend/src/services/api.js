@@ -41,7 +41,7 @@ const deleteWatch = async (id) => {
 }
 
 const getNFLData = async () => {
-    const res = await axios.get('/nfl_data.json');
+    const res = await axios.get('http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard');
     const watch_map = await getWatches();
     const data = res.data.events.map((event) => {
         return {
