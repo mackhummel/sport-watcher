@@ -5,6 +5,7 @@ import { Visibility, VisibilityOutlined } from "@mui/icons-material";
 const EventItem = (props) => {
     const { event, handler, watched } = props;
     const date = new Date(event.date).toLocaleString();
+    
     return (
         <ListItemButton onClick={()=>handler(event)}>
             <ListItemText
