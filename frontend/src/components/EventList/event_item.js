@@ -3,7 +3,7 @@ import { ListItemButton, ListItemText, ListItemIcon } from "@mui/material";
 import { Visibility, VisibilityOutlined } from "@mui/icons-material";
 
 const EventItem = (props) => {
-    const { event, handler } = props;
+    const { event, handler, watched } = props;
     const date = new Date(event.date).toLocaleString();
     return (
         <ListItemButton onClick={()=>handler(event)}>
@@ -13,7 +13,7 @@ const EventItem = (props) => {
                 secondary={date}
             />
             <ListItemIcon>
-                {event.watched ? <Visibility/> : <VisibilityOutlined/>}
+                {watched ? <Visibility/> : <VisibilityOutlined/>}
             </ListItemIcon>
         </ListItemButton>
     )

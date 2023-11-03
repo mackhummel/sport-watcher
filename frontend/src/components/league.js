@@ -13,7 +13,7 @@ const League = (props) => {
                 />
                 <Typography display={'flex'} alignItems={'center'} justifyContent={'center'} variant="h4" >{name}</Typography>
             </Stack>
-            <Typography >Games Watched: {amount}</Typography>
+            {/* <Typography >Games Watched: {amount}</Typography> */}
         </>
     )
 }

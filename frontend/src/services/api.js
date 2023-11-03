@@ -40,6 +40,44 @@ const deleteWatch = async (id) => {
     });
 }
 
+const getFootballCalendar = async (league, year, is_default) => {
+    if (is_default) {
+        const url = `https://site.api.espn.com/apis/site/v2/sports/football/${league}/scoreboard`;
+        const res = await axios.get(url);
+        const ret = {
+            calendar: res.data.leagues[0].calendar,
+            current_year: res.data.season.year,
+            current_season_type: res.data.season.type,
+            current_week: res.data.week.number
+        };
+        return ret;
+    }
+    else {
+        const url = `https://site.api.espn.com/apis/site/v2/sports/football/${league}/scoreboard?dates=${year}`;
+        const res = await axios.get(url);
+        return {
+            calendar: res.data.leagues[0].calendar,
+        };
+    }
+
+}
+
+const getFootballWeekSchedule = async (league, year, season_type, week) => {
+    const url = `https://site.api.espn.com/apis/site/v2/sports/football/${league}/scoreboard?dates=${year}&week=${week}&seasontype=${season_type}`;
+    const res = await axios.get(url);
+    return res.data.events;
+}
+
+const getYears = () => {
+    const two_thousand = 2000;
+    const years = [];
+    const event = new Date();
+    for (let i = two_thousand; i <= event.getFullYear(); i++) {
+        years.push(i);
+    }
+    return years;
+}
+
 const getNFLData = async () => {
     const res = await axios.get('http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard');
     const watch_map = await getWatches();
@@ -71,5 +109,8 @@ export {
     postWatch,
     deleteWatch,
     getNFLData,
-    fetchJwtToken
+    fetchJwtToken,
+    getFootballCalendar,
+    getFootballWeekSchedule,
+    getYears
 } 

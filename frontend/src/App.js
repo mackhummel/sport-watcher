@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import './App.css';
 import { Amplify } from 'aws-amplify';
-import { Container } from '@mui/material'
+// import { Container } from '@mui/material'
 import awsExports from './aws-exports';
 import { Authenticator, Input, Label } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import NFL from './views/nfl';
-import NavBar from './components/navbar';
+import Authenticated from './views/authenticated';
 
 Amplify.configure({
   Auth: {
@@ -20,7 +20,6 @@ Amplify.configure({
 
 
 const App = () => {
-  const [logout, setLogout] = useState(false);
   const theme = createTheme({
     palette: {
       mode: 'dark',
@@ -33,7 +32,6 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* {console.log()} */}
       <Authenticator initialState='signIn'
         components={{
           SignUp: {
@@ -52,7 +50,7 @@ const App = () => {
             },
           },
         }}
-        
+
         services={{
           async validateCustomSignUp(formData) {
             if (!formData.given_name) {
@@ -75,10 +73,7 @@ const App = () => {
       >
         {({ signOut, user }) => {
           return (
-            < >
-              <NavBar signOut={signOut} />
-              <NFL />
-            </>
+            <Authenticated signOut={signOut} />
           )
         }}
       </Authenticator>
