@@ -37,6 +37,7 @@ s3_prefix = "sport-watcher-stack"
 region = "us-east-2"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Env=\"staging\" CognitoUserPoolName=\"sport-watcher-userpool-staging\" CognitoWebClientName=\"sport-watcher-webclient-staging\""
 image_repositories = []
 
 [prod.deploy.parameters]
